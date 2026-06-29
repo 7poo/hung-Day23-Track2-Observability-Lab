@@ -11,3 +11,14 @@ providers:
     options:
       path: /var/lib/grafana/dashboards
       foldersFromFilesStructure: false
+
+  - name: 'AICB-Cross-Day'
+    orgId: 1
+    folder: 'AICB Day 23'
+    type: file
+    disableDeletion: false
+    updateIntervalSeconds: 30
+    allowUiUpdates: true
+    options:
+      path: /var/lib/grafana/integration
+      foldersFromFilesStructure: false

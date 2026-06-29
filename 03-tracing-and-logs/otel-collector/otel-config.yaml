@@ -53,6 +53,10 @@ exporters:
     tls:
       insecure: true
 
+  # Loki 3.x accepts OpenTelemetry logs at /otlp/v1/logs.
+  otlphttp/loki:
+    endpoint: http://loki:3100/otlp
+
   debug:
     verbosity: basic
 
@@ -67,6 +71,11 @@ service:
       receivers: [otlp, prometheus]
       processors: [resource, batch]
       exporters: [debug]
+
+    logs:
+      receivers: [otlp]
+      processors: [resource, batch]
+      exporters: [otlphttp/loki]
 
   telemetry:
     logs:

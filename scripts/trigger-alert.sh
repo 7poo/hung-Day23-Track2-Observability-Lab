@@ -10,7 +10,7 @@ docker stop day23-app >/dev/null
 echo "Step 2: wait 90s for ServiceDown alert to fire"
 for i in {1..18}; do
   sleep 5
-  alerts=$(curl -fsS http://localhost:9093/api/v2/alerts 2>/dev/null | grep -c '"state":"active"' || true)
+  alerts=$(curl -fsS http://127.0.0.1:9093/api/v2/alerts 2>/dev/null | grep -c '"state":"active"' || true)
   if [ "$alerts" -gt 0 ]; then
     echo "  alert fired (after ${i}*5s)"
     break
@@ -24,7 +24,7 @@ docker start day23-app >/dev/null
 echo "Step 4: wait 60s for alert to resolve"
 for i in {1..12}; do
   sleep 5
-  alerts=$(curl -fsS http://localhost:9093/api/v2/alerts 2>/dev/null | grep -c '"state":"active"' || true)
+  alerts=$(curl -fsS http://127.0.0.1:9093/api/v2/alerts 2>/dev/null | grep -c '"state":"active"' || true)
   if [ "$alerts" -eq 0 ]; then
     echo "  alert resolved"
     exit 0

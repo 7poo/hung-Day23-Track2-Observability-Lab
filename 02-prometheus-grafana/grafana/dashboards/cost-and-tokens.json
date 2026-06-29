@@ -24,7 +24,10 @@
         "expr": "3600 * (sum(rate(inference_tokens_total{direction=\"input\"}[5m])) * 0.0000005 + sum(rate(inference_tokens_total{direction=\"output\"}[5m])) * 0.000002)",
         "refId": "A"
       }],
-      "fieldConfig": {"defaults": {"unit": "currencyUSD",
+      "options": {
+        "reduceOptions": {"values": false, "calcs": ["max"], "fields": ""}
+      },
+      "fieldConfig": {"defaults": {"unit": "currencyUSD", "decimals": 6,
         "thresholds": {"mode": "absolute", "steps": [
           {"color": "green", "value": null},
           {"color": "yellow", "value": 5},
